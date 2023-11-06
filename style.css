@@ -118,7 +118,8 @@ button{
 
 .grid{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     background-color: white;
     width: 1000px;
 }
