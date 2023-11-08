@@ -1,14 +1,27 @@
-let gridSize = document.getElementById("myRange").value;
-const grid = document.getElementsByClassName = "grid";
+const grid = document.querySelector('.container');
+const slider = document.querySelector('#myRange');
+const sliderValue = slider.value;
+console.log(sliderValue);
 
-function createGrid(gridSize){
-    
-    for(let i = 0; i < gridSize; i++) {
-        const div = document.createElement("div");
-        console.log(div)
-        div.className="square";
-        grid.appendChild(document.createTextNode(div));
+function genereateGrid(gridSize = 16) {
+    for (let i = 0; i < sliderValue; i++) {
+        const row = document.createElement('div');
+        row.className = 'row';
+        grid.appendChild(row);
+        for (let j = 0; j < sliderValue; j++) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            row.appendChild(pixel);
+        }
     }
 }
 
-createGrid(gridSize);
+function ResetGridContainer() {
+    for (let i = 0; i < sliderValue; i++) {
+        const rowToRemove = document.querySelector('.row');
+        grid.removeChild(rowToRemove);
+    }
+}
+
+genereateGrid();
+

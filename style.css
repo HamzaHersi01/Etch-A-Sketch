@@ -116,13 +116,25 @@ button{
 
 
 
-.grid{
+.container{
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    background-color: white;
     width: 1000px;
 }
 
+.row {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.pixel {
+    background-color: white;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0; 
+}
 
 
