@@ -3,10 +3,10 @@ const slider = document.querySelector('#myRange');
 let sliderValue = slider.value;
 const clear = document.querySelector('.clear')
 const eraser = document.querySelector('.eraser')
+const resolution = document.querySelector('.resoloution')
 let color = 'red';
 let realColor = color;
 const wipe = 'white'
-const pixels = document.querySelectorAll('.pixel');
 let activeButton =null;
 let currentID = null;
 
@@ -93,5 +93,6 @@ slider.addEventListener('input', function(){
     sliderValue= Number(slider.value);
     ResetGridContainer()
     genereateGrid(sliderValue)
+    resolution.textContent=""+sliderValue+"x"+sliderValue;
     
 })
