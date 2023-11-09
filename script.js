@@ -74,11 +74,6 @@ function ResetGridContainer() {
 
 genereateGrid()
 
-clear.addEventListener('click', function(){
-    wipeGridColor()
-    clear.style.backgroundColor = 'black';
-    setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
-})
 
 
 slider.addEventListener('input', function(){
@@ -89,16 +84,11 @@ slider.addEventListener('input', function(){
     
 })
 
-rainbow.addEventListener('click', function(){
-    if (activeButton!='rainbow'){
-        activeButton='rainbow'
-        
-        }
-})
+
 buttons.forEach(function(button){
     button.addEventListener('click',function(event){
        //Add button logic here
-       const button =event.target.className
+       const button = event.target.className
        console.log(button)
        switch(button){
         case 'eraser':
@@ -109,9 +99,14 @@ buttons.forEach(function(button){
                 erase();
             } 
             break;
-            
-        
+
+        case 'clear':
+            wipeGridColor()
+            clear.style.backgroundColor = 'black';
+            setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
        }
+       
+
     })
 })
 
