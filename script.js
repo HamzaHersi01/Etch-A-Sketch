@@ -4,6 +4,8 @@ let sliderValue = slider.value;
 const clear = document.querySelector('.clear')
 const eraser = document.querySelector('.eraser')
 const resolution = document.querySelector('.resoloution')
+const rainbow = document.querySelector('.rainbow')
+const buttons = document.querySelectorAll('#button')
 let color = 'red';
 let realColor = color;
 const wipe = 'white'
@@ -96,3 +98,16 @@ slider.addEventListener('input', function(){
     resolution.textContent=""+sliderValue+"x"+sliderValue;
     
 })
+
+rainbow.addEventListener('click', function(){
+    if (activeButton!='rainbow'){
+        activeButton='rainbow'
+        
+        }
+})
+buttons.forEach(function(button){
+    button.addEventListener('click',function(event){
+       //Add button logic here
+    })
+})
+
