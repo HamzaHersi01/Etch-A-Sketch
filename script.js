@@ -23,13 +23,10 @@ function ChangeColor(id,color){
 }
 
 function erase(){
-    if (activeButton === 'erase') {
-        resetErase();
-    } else {
-        activeButton = 'erase';
+        activeButton = 'eraser';
         eraser.style.backgroundColor = 'black';
         color =  wipe;
-    }
+    
 }
 
 function resetErase(){
@@ -84,7 +81,7 @@ clear.addEventListener('click', function(){
 })
 
 eraser.addEventListener('click', function(){
-    if (activeButton!='erase'){
+    if (activeButton!='eraser'){
     erase()
     }else{
         resetErase();
@@ -108,6 +105,18 @@ rainbow.addEventListener('click', function(){
 buttons.forEach(function(button){
     button.addEventListener('click',function(event){
        //Add button logic here
+       const button =event.target.className
+       switch(button){
+        case(button =='eraser'):{
+            if (activeButton === 'eraser') {
+                resetErase();
+            } else {
+                activeButton = 'eraser';
+                eraser.style.backgroundColor = 'black';
+                color =  wipe;
+            }
+        }
+       }
     })
 })
 
