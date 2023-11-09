@@ -80,13 +80,6 @@ clear.addEventListener('click', function(){
     setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
 })
 
-eraser.addEventListener('click', function(){
-    if (activeButton!='eraser'){
-    erase()
-    }else{
-        resetErase();
-    }
-})
 
 slider.addEventListener('input', function(){
     sliderValue= Number(slider.value);
@@ -106,16 +99,18 @@ buttons.forEach(function(button){
     button.addEventListener('click',function(event){
        //Add button logic here
        const button =event.target.className
+       console.log(button)
        switch(button){
-        case(button =='eraser'):{
+        case 'eraser':
             if (activeButton === 'eraser') {
                 resetErase();
-            } else {
-                activeButton = 'eraser';
-                eraser.style.backgroundColor = 'black';
-                color =  wipe;
-            }
-        }
+                }
+            else {
+                erase();
+            } 
+            break;
+            
+        
        }
     })
 })
