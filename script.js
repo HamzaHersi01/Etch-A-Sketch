@@ -4,27 +4,36 @@ const sliderValue = slider.value;
 const clear = document.querySelector('.clear')
 const eraser = document.querySelector('.eraser')
 let color = 'red';
+let realColor = color;
 const wipe = 'white'
 const pixels = document.querySelectorAll('.pixel');
-let activeButton =null
+let activeButton =null;
+let currentID = null;
 
-function ChangeColor(element,color){
+function ChangeColor(id,color){
+    let element= document.getElementById(id);
     element.style.backgroundColor = color;
-    realColor =color
+    if(activeButton==='erase'){
+        return
+    }else{
+    realColor = color
+    }
 }
 
 function erase(){
-    ChangeColor(pixel, wipe)
-    if(activeButton!='eraser'){
-    eraser.style.backgroundColor = 'black'
-    activeButton='eraser'
-    }else{
-    activeButton=null
-    eraser.style.backgroundColor= 'grey'
-    color= realColor
-    
+    if (activeButton === 'erase') {
+        resetErase();
+    } else {
+        activeButton = 'erase';
+        eraser.style.backgroundColor = 'black';
+        color =  wipe;
     }
-    
+}
+
+function resetErase(){
+    activeButton = null;
+    eraser.style.backgroundColor = 'grey';
+    color = realColor;
 }
 
 function wipeGridColor(){
@@ -36,6 +45,7 @@ function wipeGridColor(){
 }
 
 function genereateGrid(gridSize = 16) {
+    let id = 1
     for (let i = 0; i < sliderValue; i++) {
         const row = document.createElement('div');
         row.className = 'row';
@@ -43,13 +53,18 @@ function genereateGrid(gridSize = 16) {
         for (let j = 0; j < sliderValue; j++) {
             const pixel = document.createElement('div');
             pixel.className = 'pixel';
+            pixel.id = id;
             pixel.addEventListener('click', function() {
-            ChangeColor(pixel,color)
+            currentID = pixel.id;
+            ChangeColor(currentID,color)
+            console.log(color)
             });
             row.appendChild(pixel);
+            id+=1;
         }
     }
 }
+
 
 function ResetGridContainer() {
     for (let i = 0; i < sliderValue; i++) {
@@ -62,9 +77,15 @@ genereateGrid()
 
 clear.addEventListener('click', function(){
     wipeGridColor()
+    clear.style.backgroundColor = 'black';
+    setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
 })
 
 eraser.addEventListener('click', function(){
+    if (activeButton!='erase'){
     erase()
+    }else{
+        resetErase();
+    }
 })
 
