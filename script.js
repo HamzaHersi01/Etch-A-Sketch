@@ -1,6 +1,6 @@
 const grid = document.querySelector('.container');
 const slider = document.querySelector('#myRange');
-const sliderValue = slider.value;
+let sliderValue = slider.value;
 const clear = document.querySelector('.clear')
 const eraser = document.querySelector('.eraser')
 let color = 'red';
@@ -67,9 +67,9 @@ function genereateGrid(gridSize = 16) {
 
 
 function ResetGridContainer() {
-    for (let i = 0; i < sliderValue; i++) {
-        const rowToRemove = document.querySelector('.row');
-        grid.removeChild(rowToRemove);
+    let container = document.querySelector('.container')
+    while(container.firstChild){
+        container.removeChild(container.firstChild)
     }
 }
 
@@ -89,3 +89,9 @@ eraser.addEventListener('click', function(){
     }
 })
 
+slider.addEventListener('input', function(){
+    sliderValue= Number(slider.value);
+    ResetGridContainer()
+    genereateGrid(sliderValue)
+    
+})
