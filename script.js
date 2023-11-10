@@ -4,11 +4,13 @@ let sliderValue = slider.value;
 const colorPicker = document.querySelector('#color-picker')
 let color = colorPicker.value
 const clear = document.querySelector('.clear')
+const colorButton = document.querySelector('.color')
 const eraser = document.querySelector('.eraser')
 const resolution = document.querySelector('.resoloution')
 const rainbow = document.querySelector('.rainbow')
 const buttons = document.querySelectorAll('#button')
 let realColor = color;
+let randomColor = null;
 const wipe = 'white'
 let activeButton =null;
 let currentID = null;
@@ -23,16 +25,45 @@ function ChangeColor(id,color){
     }
 }
 
+function GenerateRandomColor(){
+    const val1 = Math.random()*255;
+    const val2 = Math.random()*255;
+    const val3 = Math.random()*255;
+    randomColor = `rgb(${val1}, ${val2}, ${val3})`;
+
+}
+
+function setButtonColor(button){
+    button.style.backgroundColor = 'black';
+}
+
+function resetButtonColor(button){
+    button.style.backgroundColor = 'grey';
+}
+
 function erase(){
         activeButton = 'eraser';
-        eraser.style.backgroundColor = 'black';
         color =  wipe;
     
 }
 
+function colorMode(){
+    activeButton='color';
+    color = realColor
+}
+function rainbowMode(){
+    GenerateRandomColor();
+    activeButton='rainbow';
+}
+
+function disableColor_Rainbow(){
+    activeButton = null;
+}
+
+
+
 function resetErase(){
     activeButton = null;
-    eraser.style.backgroundColor = 'grey';
     color = realColor;
 }
 
@@ -56,8 +87,13 @@ function genereateGrid(gridSize = 16) {
             pixel.id = id;
             pixel.addEventListener('click', function() {
             currentID = pixel.id;
-            ChangeColor(currentID,color)
-            console.log(color)
+            if(activeButton==='color' || 'eraser'){
+                ChangeColor(currentID,color);
+            }else if(activeButton === 'rainbow'){
+                GenerateRandomColor();
+                ChangeColor(currentID, randomColor)
+            }
+            
             });
             row.appendChild(pixel);
             id+=1;
@@ -72,7 +108,8 @@ function ResetGridContainer() {
         container.removeChild(container.firstChild)
     }
 }
-
+setButtonColor(colorButton);
+colorMode();
 genereateGrid()
 
 
@@ -99,9 +136,14 @@ buttons.forEach(function(button){
         case 'eraser':
             if (activeButton === 'eraser') {
                 resetErase();
+                resetButtonColor(eraser)
                 }
             else {
+                if(activeButton){
+                    resetButtonColor(document.querySelector('.'+activeButton))
+                }
                 erase();
+                setButtonColor(eraser)
             } 
             break;
 
@@ -109,8 +151,33 @@ buttons.forEach(function(button){
             wipeGridColor();
             clear.style.backgroundColor = 'black';
             setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
+            break;
 
         case 'color':
+            if(activeButton === 'color'){
+                disableColor_Rainbow()
+                resetButtonColor(colorButton);
+            }else{
+                if(activeButton){
+                    resetButtonColor(document.querySelector('.'+activeButton))
+                }
+                setButtonColor(colorButton);
+                colorMode();
+                
+            }
+
+            break;
+        case 'rainbow':
+            if(activeButton==='rainbow'){
+                disableColor_Rainbow()
+                resetButtonColor(rainbow);
+            }else{
+                if(activeButton){
+                    resetButtonColor(document.querySelector('.'+activeButton))
+                }
+                setButtonColor(rainbow);
+                rainbowMode();
+            }
             
 
        }
