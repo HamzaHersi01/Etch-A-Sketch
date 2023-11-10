@@ -14,6 +14,7 @@ let randomColor = null;
 const wipe = 'white'
 let activeButton =null;
 let currentID = null;
+let mouseDown = false
 
 function ChangeColor(id,color){
     let element= document.getElementById(id);
@@ -85,20 +86,22 @@ function genereateGrid(gridSize = 16) {
             const pixel = document.createElement('div');
             pixel.className = 'pixel';
             pixel.id = id;
-            pixel.addEventListener('click', function() {
-            currentID = pixel.id;
-            if(activeButton === 'color' || activeButton === 'eraser'){
-                console.log('Color/Eraser');
-                ChangeColor(currentID,color);
-            }else if(activeButton === 'rainbow'){
-                console.log('rainbow mode in event lstner')
-                GenerateRandomColor();
-                ChangeColor(currentID, randomColor)
+            pixel.addEventListener('mouseover', function() {
+            if(mouseDown){
+                currentID = pixel.id;
+                if(activeButton === 'color' || activeButton === 'eraser'){
+                    console.log('Color/Eraser');
+                   ChangeColor(currentID,color);
+                }else if(activeButton === 'rainbow'){
+                    console.log('rainbow mode in event lstner')
+                    GenerateRandomColor();
+                   ChangeColor(currentID, randomColor)
+                 }
             }
-            
             });
             row.appendChild(pixel);
             id+=1;
+        
         }
     }
 }
@@ -114,7 +117,13 @@ setButtonColor(colorButton);
 colorMode();
 genereateGrid()
 
+document.addEventListener('mousedown', function(){
+    mouseDown = true;
+})
 
+document.addEventListener('mouseup', function(){
+    mouseDown = false;
+})
 
 slider.addEventListener('input', function(){
     sliderValue= Number(slider.value);
