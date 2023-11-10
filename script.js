@@ -90,10 +90,8 @@ function genereateGrid(gridSize = 16) {
             if(mouseDown){
                 currentID = pixel.id;
                 if(activeButton === 'color' || activeButton === 'eraser'){
-                    console.log('Color/Eraser');
                    ChangeColor(currentID,color);
                 }else if(activeButton === 'rainbow'){
-                    console.log('rainbow mode in event lstner')
                     GenerateRandomColor();
                    ChangeColor(currentID, randomColor)
                  }
@@ -142,7 +140,6 @@ buttons.forEach(function(button){
     button.addEventListener('click',function(event){
        //Add button logic here
        const button = event.target.className
-       console.log(button)
        switch(button){
         case 'eraser':
             if (activeButton === 'eraser') {
@@ -168,7 +165,6 @@ buttons.forEach(function(button){
             if(activeButton === 'color'){
                 disableColor_Rainbow()
                 resetButtonColor(colorButton);
-                console.log(activeButton)
             }else{
                 if(activeButton){
                     resetButtonColor(document.querySelector('.'+activeButton))
@@ -196,6 +192,5 @@ buttons.forEach(function(button){
        
 
     })
-    console.log(activeButton)
 })
 
