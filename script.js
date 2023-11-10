@@ -16,7 +16,7 @@ let currentID = null;
 function ChangeColor(id,color){
     let element= document.getElementById(id);
     element.style.backgroundColor = color;
-    if(activeButton==='erase'){
+    if(activeButton==='eraser'){
         return
     }else{
     realColor = color
