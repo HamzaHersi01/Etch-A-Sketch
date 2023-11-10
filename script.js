@@ -18,7 +18,7 @@ let currentID = null;
 function ChangeColor(id,color){
     let element= document.getElementById(id);
     element.style.backgroundColor = color;
-    if(activeButton==='eraser'){
+    if(activeButton==='eraser' || activeButton ==='rainbow'){
         return
     }else{
     realColor = color
@@ -87,9 +87,11 @@ function genereateGrid(gridSize = 16) {
             pixel.id = id;
             pixel.addEventListener('click', function() {
             currentID = pixel.id;
-            if(activeButton==='color' || 'eraser'){
+            if(activeButton === 'color' || activeButton === 'eraser'){
+                console.log('Color/Eraser');
                 ChangeColor(currentID,color);
             }else if(activeButton === 'rainbow'){
+                console.log('rainbow mode in event lstner')
                 GenerateRandomColor();
                 ChangeColor(currentID, randomColor)
             }
@@ -157,6 +159,7 @@ buttons.forEach(function(button){
             if(activeButton === 'color'){
                 disableColor_Rainbow()
                 resetButtonColor(colorButton);
+                console.log(activeButton)
             }else{
                 if(activeButton){
                     resetButtonColor(document.querySelector('.'+activeButton))
@@ -184,5 +187,6 @@ buttons.forEach(function(button){
        
 
     })
+    console.log(activeButton)
 })
 
