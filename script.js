@@ -1,12 +1,13 @@
 const grid = document.querySelector('.container');
 const slider = document.querySelector('#myRange');
 let sliderValue = slider.value;
+const colorPicker = document.querySelector('#color-picker')
+let color = colorPicker.value
 const clear = document.querySelector('.clear')
 const eraser = document.querySelector('.eraser')
 const resolution = document.querySelector('.resoloution')
 const rainbow = document.querySelector('.rainbow')
 const buttons = document.querySelectorAll('#button')
-let color = 'red';
 let realColor = color;
 const wipe = 'white'
 let activeButton =null;
@@ -84,6 +85,10 @@ slider.addEventListener('input', function(){
     
 })
 
+colorPicker.addEventListener('change',function(){
+    color=String(colorPicker.value)
+})
+
 
 buttons.forEach(function(button){
     button.addEventListener('click',function(event){
@@ -101,9 +106,10 @@ buttons.forEach(function(button){
             break;
 
         case 'clear':
-            wipeGridColor()
+            wipeGridColor();
             clear.style.backgroundColor = 'black';
             setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
+
        }
        
 
