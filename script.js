@@ -110,6 +110,9 @@ buttons.forEach(function(button){
             clear.style.backgroundColor = 'black';
             setTimeout(function() {clear.style.backgroundColor = 'grey';}, 100);
 
+        case 'color':
+            
+
        }
        
 
